@@ -1,4 +1,4 @@
-# guesstheday
+# Guess the Day
 Guess the Day app
 For Delta Android App Task 1
 
