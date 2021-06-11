@@ -6,11 +6,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Scroller;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,13 +22,14 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class MainActivity extends AppCompatActivity {
-    static TextView date_text,score_text,high_text;
-    Button opt_butt[]= new Button[4];
+    static TextView date_text,score_text,high_text,timer_text;
+    Button[] opt_butt = new Button[4];
     static String ans;
     static String week[]={"Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat"};
     private int Score=0;
     ConstraintLayout home;
     private int highScore = 0;
+    public int counter;
 
     SharedPreferences sharedPref;
     SharedPreferences.Editor SP_edit;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         score_text = findViewById(R.id.score);
         home = findViewById(R.id.home);
         high_text = findViewById(R.id.high_score);
+        timer_text = findViewById(R.id.timer);
 
         sharedPref = getSharedPreferences("High Score", MODE_PRIVATE);
         SP_edit = sharedPref.edit();
@@ -113,6 +115,20 @@ public class MainActivity extends AppCompatActivity {
 
         //Toast.makeText(this, ans, Toast.LENGTH_SHORT).show();
 
+        counter=10;
+        new CountDownTimer(10000, 1000){
+            public void onTick(long millisUntilFinished){
+                timer_text.setText("Timer : "+counter);
+                counter--;
+            }
+            public  void onFinish(){
+                //Toast.makeText(MainActivity.this, "Times Up", Toast.LENGTH_SHORT).show();
+                timer_text.setText("Times Up");
+                highScore=Math.max(highScore,Score);
+                Score=0;
+            }
+        }.start();
+
         //Change color of home layout
         home.setBackgroundColor(getResources().getColor(R.color.wrong));
 
@@ -166,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(Score<0){
-            Toast.makeText(this, "Game Ended, Your Score is "+ Score, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Game Ended, Your Score is "+ (Score+1), Toast.LENGTH_SHORT).show();
             Score=0;
             home.setBackgroundColor(getResources().getColor(R.color.white));
         }
