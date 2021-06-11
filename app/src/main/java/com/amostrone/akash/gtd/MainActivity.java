@@ -1,6 +1,7 @@
 package com.amostrone.akash.gtd;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     static String ans;
     static String week[]={"Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat"};
     private int Score=0;
+    ConstraintLayout home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         opt_butt[3]=findViewById(R.id.button4);
         date_text = findViewById(R.id.text_date);
         score_text = findViewById(R.id.score);
+        home = findViewById(R.id.home);
 
         String strDate = setDate_Text();
         date_text.setText(strDate);
@@ -97,23 +100,34 @@ public class MainActivity extends AppCompatActivity {
 
         //Toast.makeText(this, ans, Toast.LENGTH_SHORT).show();
 
+        //Change color of home layout
+        home.setBackgroundColor(getResources().getColor(R.color.wrong));
+
         switch (view.getId()) {
             case R.id.button1:
-                if(opt_butt[0].getText().toString().equals(ans))
+                if(opt_butt[0].getText().toString().equals(ans)){
                     Score++;
+                    home.setBackgroundColor(getResources().getColor(R.color.right));
+                }
                 //Log.e("Options", opt_butt[0].getText().toString()+" "+ans);
                 break;
             case R.id.button2:
-                if(opt_butt[1].getText().equals(ans))
+                if(opt_butt[1].getText().equals(ans)){
                     Score++;
+                    home.setBackgroundColor(getResources().getColor(R.color.right));
+                }
                 break;
             case R.id.button3:
-                if(opt_butt[2].getText().equals(ans))
+                if(opt_butt[2].getText().equals(ans)){
                     Score++;
+                    home.setBackgroundColor(getResources().getColor(R.color.right));
+                }
                 break;
             case R.id.button4:
-                if(opt_butt[3].getText().equals(ans))
+                if(opt_butt[3].getText().equals(ans)){
                     Score++;
+                    home.setBackgroundColor(getResources().getColor(R.color.right));
+                }
                 break;
         }
 
