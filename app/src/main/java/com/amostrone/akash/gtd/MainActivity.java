@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
@@ -21,12 +22,16 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class MainActivity extends AppCompatActivity {
-    static TextView date_text,score_text;
+    static TextView date_text,score_text,high_text;
     Button opt_butt[]= new Button[4];
     static String ans;
     static String week[]={"Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat"};
     private int Score=0;
     ConstraintLayout home;
+    private int highScore = 0;
+
+    SharedPreferences sharedPref;
+    SharedPreferences.Editor SP_edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,13 @@ public class MainActivity extends AppCompatActivity {
         date_text = findViewById(R.id.text_date);
         score_text = findViewById(R.id.score);
         home = findViewById(R.id.home);
+        high_text = findViewById(R.id.high_score);
+
+        sharedPref = getSharedPreferences("High Score", MODE_PRIVATE);
+        SP_edit = sharedPref.edit();
+
+        highScore = sharedPref.getInt("High Score", 0);
+        high_text.setText("High Score : "+highScore);
 
         String strDate = setDate_Text();
         date_text.setText(strDate);
@@ -103,6 +115,15 @@ public class MainActivity extends AppCompatActivity {
 
         //Change color of home layout
         home.setBackgroundColor(getResources().getColor(R.color.wrong));
+
+        //High score
+        highScore=Math.max(highScore,Score);
+        high_text.setText("High Score : "+highScore);
+
+        //Saving high Score to Shared prefrences
+        // write all the data entered by the user in SharedPreference and apply
+        SP_edit.putInt("High Score", highScore);
+        SP_edit.apply();
 
         switch (view.getId()) {
             case R.id.button1:
