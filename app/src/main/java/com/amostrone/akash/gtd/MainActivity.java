@@ -9,6 +9,7 @@ import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Scroller;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -109,6 +110,9 @@ public class MainActivity extends AppCompatActivity {
                     Score++;
                     home.setBackgroundColor(getResources().getColor(R.color.right));
                 }
+                else {
+                    Score--;
+                }
                 //Log.e("Options", opt_butt[0].getText().toString()+" "+ans);
                 break;
             case R.id.button2:
@@ -116,11 +120,17 @@ public class MainActivity extends AppCompatActivity {
                     Score++;
                     home.setBackgroundColor(getResources().getColor(R.color.right));
                 }
+                else {
+                    Score--;
+                }
                 break;
             case R.id.button3:
                 if(opt_butt[2].getText().equals(ans)){
                     Score++;
                     home.setBackgroundColor(getResources().getColor(R.color.right));
+                }
+                else {
+                    Score--;
                 }
                 break;
             case R.id.button4:
@@ -128,7 +138,16 @@ public class MainActivity extends AppCompatActivity {
                     Score++;
                     home.setBackgroundColor(getResources().getColor(R.color.right));
                 }
+                else {
+                    Score--;
+                }
                 break;
+        }
+
+        if(Score<0){
+            Toast.makeText(this, "Game Ended, Your Score is "+ Score, Toast.LENGTH_SHORT).show();
+            Score=0;
+            home.setBackgroundColor(getResources().getColor(R.color.white));
         }
 
         String strDate = setDate_Text();
