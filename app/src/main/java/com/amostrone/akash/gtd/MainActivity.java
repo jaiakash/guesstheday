@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             Date date = new SimpleDateFormat("d MMM yyyy").parse(dt);
             ans= date.toString().substring(0,4);
-            //Toast.makeText(this, ans, Toast.LENGTH_SHORT).show();
+            Log.i("Answers ", ans+"");
         } catch (ParseException e) {
             Log.e("Date conversion","ParseException occured: " + e.getMessage());
         }
@@ -106,6 +106,38 @@ public class MainActivity extends AppCompatActivity {
 
     public static int randBetween(int start, int end) {
         return start + (int)Math.round(Math.random() * (end - start));
+    }
+
+    //Declare timer
+    CountDownTimer cTimer = null;
+
+    //start timer function
+    void startTimer() {
+        counter=10;
+        cTimer = new CountDownTimer(10000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                timer_text.setText("Timer : "+counter);
+                counter--;
+                if(counter<0) {
+                    //Log.i("Answers", counter+"");
+                    gameEnd();
+                }
+            }
+            public void onFinish() {
+                //Toast.makeText(MainActivity.this, "Times Up", Toast.LENGTH_SHORT).show();
+                timer_text.setText("Times Up");
+                gameEnd();
+                //Score=0;
+            }
+        };
+        cTimer.start();
+    }
+
+    //cancel timer
+    void cancelTimer() {
+        if(cTimer!=null) {
+            cTimer.cancel();
+        }
     }
 
     void gameEnd(){
@@ -121,6 +153,8 @@ public class MainActivity extends AppCompatActivity {
         SP_edit.putInt("High Score", highScore);
         SP_edit.apply();
 
+        cancelTimer();
+
         //Toast.makeText(this, "Game Ended, Your Score is "+ (Score+1), Toast.LENGTH_SHORT).show();
         Score=0;
         home.setBackgroundColor(getResources().getColor(R.color.white));
@@ -131,22 +165,6 @@ public class MainActivity extends AppCompatActivity {
         //Vibration
         Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         vibe.vibrate(80);
-
-        //Toast.makeText(this, ans, Toast.LENGTH_SHORT).show();
-
-        /*counter=10;
-        new CountDownTimer(10000, 1000){
-            public void onTick(long millisUntilFinished){
-                timer_text.setText("Timer : "+counter);
-                counter--;
-            }
-            public  void onFinish(){
-                //Toast.makeText(MainActivity.this, "Times Up", Toast.LENGTH_SHORT).show();
-                timer_text.setText("Times Up");
-                gameEnd();
-                //Score=0;
-            }
-        }.start();*/
 
         //Change color of home layout
         home.setBackgroundColor(getResources().getColor(R.color.wrong));
@@ -192,6 +210,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Log.i("Score", Score+"");
+
+        startTimer();
 
         String strDate = setDate_Text();
         date_text.setText(strDate);
