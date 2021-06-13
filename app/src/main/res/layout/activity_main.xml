@@ -45,6 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="48dp"
         android:text="Timer"
+        android:visibility="invisible"
         android:textSize="24sp"
         android:typeface="monospace"
         app:layout_constraintBottom_toBottomOf="parent"

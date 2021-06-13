@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         String strDate = setDate_Text();
         date_text.setText(strDate);
-        score_text.setText("Score : "+Score);
+        score_text.setText("Start Game");
         //Toast.makeText(this, ans, Toast.LENGTH_SHORT).show();
 
         make_option();
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             opt_butt[rand_l.get(i)].setText(opt[i]);
     }
 
-    public static String setDate_Text(){
+    String setDate_Text(){
 
         GregorianCalendar gc = new GregorianCalendar();
         int year = randBetween(1900, 2100);
@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             Date date = new SimpleDateFormat("d MMM yyyy").parse(dt);
             ans= date.toString().substring(0,4);
+            //Toast.makeText(this, ans, Toast.LENGTH_SHORT).show();
         } catch (ParseException e) {
             Log.e("Date conversion","ParseException occured: " + e.getMessage());
         }
@@ -107,6 +108,24 @@ public class MainActivity extends AppCompatActivity {
         return start + (int)Math.round(Math.random() * (end - start));
     }
 
+    void gameEnd(){
+
+        //High score
+        highScore=Math.max(highScore,Score);
+        high_text.setText("High Score : "+highScore);
+
+        score_text.setText("Game Ended");
+
+        //Saving high Score to Shared prefrences
+        // write all the data entered by the user in SharedPreference and apply
+        SP_edit.putInt("High Score", highScore);
+        SP_edit.apply();
+
+        //Toast.makeText(this, "Game Ended, Your Score is "+ (Score+1), Toast.LENGTH_SHORT).show();
+        Score=0;
+        home.setBackgroundColor(getResources().getColor(R.color.white));
+    }
+
     /** Called when the user touches the button */
     public void sendMessage(View view) {
         //Vibration
@@ -115,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Toast.makeText(this, ans, Toast.LENGTH_SHORT).show();
 
-        counter=10;
+        /*counter=10;
         new CountDownTimer(10000, 1000){
             public void onTick(long millisUntilFinished){
                 timer_text.setText("Timer : "+counter);
@@ -124,22 +143,13 @@ public class MainActivity extends AppCompatActivity {
             public  void onFinish(){
                 //Toast.makeText(MainActivity.this, "Times Up", Toast.LENGTH_SHORT).show();
                 timer_text.setText("Times Up");
-                highScore=Math.max(highScore,Score);
-                Score=0;
+                gameEnd();
+                //Score=0;
             }
-        }.start();
+        }.start();*/
 
         //Change color of home layout
         home.setBackgroundColor(getResources().getColor(R.color.wrong));
-
-        //High score
-        highScore=Math.max(highScore,Score);
-        high_text.setText("High Score : "+highScore);
-
-        //Saving high Score to Shared prefrences
-        // write all the data entered by the user in SharedPreference and apply
-        SP_edit.putInt("High Score", highScore);
-        SP_edit.apply();
 
         switch (view.getId()) {
             case R.id.button1:
@@ -181,18 +191,17 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
 
-        if(Score<0){
-            Toast.makeText(this, "Game Ended, Your Score is "+ (Score+1), Toast.LENGTH_SHORT).show();
-            Score=0;
-            home.setBackgroundColor(getResources().getColor(R.color.white));
-        }
+        Log.i("Score", Score+"");
 
         String strDate = setDate_Text();
         date_text.setText(strDate);
 
         score_text.setText("Score : "+Score);
 
+        if(Score<=0) gameEnd();
+
         make_option();
+        //Toast.makeText(this, ans, Toast.LENGTH_SHORT).show();
         //Toast.makeText(this, Integer.toString(Score), Toast.LENGTH_SHORT).show();
     }
 }
