@@ -67,9 +67,12 @@ public class MainActivity extends AppCompatActivity {
         int i=1;
         while(i<4){
             String temp=week[randBetween(0,6)].substring(0,3);
-            if(opt[0].equals(temp) || opt[1].equals(temp) || opt[2].equals(temp) || opt[3].equals(temp))
+            if(opt[0].equals(temp) || opt[1].equals(temp) || opt[2].equals(temp) || opt[3].equals(temp)) {
+                //Log.i("Answers", "Option matched");
                 continue;
-            opt[i++]=temp;
+            }
+            opt[i]=temp;
+            i++;
         }
 
         ArrayList<Integer> rand_l = new ArrayList<Integer>();
@@ -78,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         }
         Collections.shuffle(rand_l);
         for(i=0;i<4;i++)
-            opt_butt[rand_l.get(i)].setText(opt[i]);
+            opt_butt[i].setText(opt[i]);
     }
 
     String setDate_Text(){
