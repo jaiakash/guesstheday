@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Toast.makeText(this, "Game Ended, Your Score is "+ (Score+1), Toast.LENGTH_SHORT).show();
         Score=0;
-        counter=27;
+        counter=30;
         home.setBackgroundColor(getResources().getColor(R.color.white));
     }
 
@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
                     home.setBackgroundColor(getResources().getColor(R.color.right));
                 }
                 else {
-                    counter-=5;
+                    cancelTimer();counter-=3;startTimer(counter);
                 }
                 //Log.e("Options", opt_butt[0].getText().toString()+" "+ans);
                 break;
@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
                     home.setBackgroundColor(getResources().getColor(R.color.right));
                 }
                 else {
-                    counter-=5;
+                    cancelTimer();counter-=3;startTimer(counter);
                 }
                 break;
             case R.id.button3:
@@ -204,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
                     home.setBackgroundColor(getResources().getColor(R.color.right));
                 }
                 else {
-                    counter-=5;
+                    cancelTimer();counter-=3;startTimer(counter);
                 }
                 break;
             case R.id.button4:
@@ -214,17 +214,19 @@ public class MainActivity extends AppCompatActivity {
                     home.setBackgroundColor(getResources().getColor(R.color.right));
                 }
                 else {
-                    counter-=5;
+                    cancelTimer();counter-=3;startTimer(counter);
                 }
                 break;
         }
 
-        Log.i("Score", Score+"");
+        //Log.i("Score", Score+"");
 
         String strDate = setDate_Text();
         date_text.setText(strDate);
 
         score_text.setText("Score : "+Score);
+
+        if(counter<0)gameEnd();
 
         make_option();
         //Toast.makeText(this, ans, Toast.LENGTH_SHORT).show();
