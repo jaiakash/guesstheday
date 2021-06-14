@@ -161,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Toast.makeText(this, "Game Ended, Your Score is "+ (Score+1), Toast.LENGTH_SHORT).show();
         Score=0;
+        counter=27;
         home.setBackgroundColor(getResources().getColor(R.color.white));
     }
 
