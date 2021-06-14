@@ -69,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
         int i=1;
         while(i<4){
             String temp=week[randBetween(0,6)].substring(0,3);
-            if(opt[0].equals(temp) || opt[1].equals(temp) || opt[2].equals(temp) || opt[3].equals(temp)) {
+            //Log.i("Logs", ans+" "+temp+" "+ans.equals(temp));
+            if(ans.equals(temp) || opt[1].equals(temp) || opt[2].equals(temp) || opt[3].equals(temp)) {
                 //Log.i("Answers", "Option matched");
                 continue;
             }
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         }
         Collections.shuffle(rand_l);
         for(i=0;i<4;i++)
-            opt_butt[i].setText(opt[i]);
+            opt_butt[i].setText(opt[rand_l.get(i)]);
     }
 
     String setDate_Text(){
@@ -100,8 +101,8 @@ public class MainActivity extends AppCompatActivity {
         //Getting Answer as 3 word eg Wed, Thu
         try {
             Date date = new SimpleDateFormat("d MMM yyyy").parse(dt);
-            ans= date.toString().substring(0,4);
-            Log.i("Answers ", ans+"");
+            ans= date.toString().substring(0,3);
+            Log.i("Logs", ans+" is ans");
         } catch (ParseException e) {
             Log.e("Date conversion","ParseException occured: " + e.getMessage());
         }
