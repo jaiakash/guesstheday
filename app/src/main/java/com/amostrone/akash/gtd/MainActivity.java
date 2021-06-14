@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private int Score=0;
     ConstraintLayout home;
     private int highScore = 0;
-    public int counter;
+    public int counter=30;
 
     SharedPreferences sharedPref;
     SharedPreferences.Editor SP_edit;
@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         //Toast.makeText(this, ans, Toast.LENGTH_SHORT).show();
 
         make_option();
+
+        startTimer(counter);
     }
 
     public void make_option(){
@@ -115,9 +117,8 @@ public class MainActivity extends AppCompatActivity {
     CountDownTimer cTimer = null;
 
     //start timer function
-    void startTimer() {
-        counter=10;
-        cTimer = new CountDownTimer(10000, 1000) {
+    void startTimer(int sec) {
+        cTimer = new CountDownTimer(sec*1000, 1000) {
             public void onTick(long millisUntilFinished) {
                 timer_text.setText("Timer : "+counter);
                 counter--;
@@ -176,52 +177,52 @@ public class MainActivity extends AppCompatActivity {
             case R.id.button1:
                 if(opt_butt[0].getText().toString().equals(ans)){
                     Score++;
+                    cancelTimer();counter+=3;startTimer(counter);
                     home.setBackgroundColor(getResources().getColor(R.color.right));
                 }
                 else {
-                    Score--;
+                    counter-=5;
                 }
                 //Log.e("Options", opt_butt[0].getText().toString()+" "+ans);
                 break;
             case R.id.button2:
                 if(opt_butt[1].getText().equals(ans)){
                     Score++;
+                    cancelTimer();counter+=3;startTimer(counter);
                     home.setBackgroundColor(getResources().getColor(R.color.right));
                 }
                 else {
-                    Score--;
+                    counter-=5;
                 }
                 break;
             case R.id.button3:
                 if(opt_butt[2].getText().equals(ans)){
                     Score++;
+                    cancelTimer();counter+=3;startTimer(counter);
                     home.setBackgroundColor(getResources().getColor(R.color.right));
                 }
                 else {
-                    Score--;
+                    counter-=5;
                 }
                 break;
             case R.id.button4:
                 if(opt_butt[3].getText().equals(ans)){
                     Score++;
+                    cancelTimer();counter+=3;startTimer(counter);
                     home.setBackgroundColor(getResources().getColor(R.color.right));
                 }
                 else {
-                    Score--;
+                    counter-=5;
                 }
                 break;
         }
 
         Log.i("Score", Score+"");
 
-        startTimer();
-
         String strDate = setDate_Text();
         date_text.setText(strDate);
 
         score_text.setText("Score : "+Score);
-
-        if(Score<=0) gameEnd();
 
         make_option();
         //Toast.makeText(this, ans, Toast.LENGTH_SHORT).show();
