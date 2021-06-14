@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Guess the Day</string>
+    <string name="rules">Guess the Day
+        Choose the correct day and win points.
+    +3 sec for correct ans -3 sec for wrong ans. Score max before time runs out</string>
 </resources>

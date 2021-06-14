@@ -9,12 +9,14 @@
 
     <TextView
         android:id="@+id/text_date"
+        android:background="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:text="Random Date"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:typeface="monospace"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -29,7 +31,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:text="High score = 0"
+        android:background="@color/white"
         android:textSize="20sp"
+        android:textStyle="bold"
         android:typeface="monospace"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -45,6 +49,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="48dp"
         android:text="Timer"
+        android:textStyle="bold"
+        android:background="@color/white"
         android:textSize="20sp"
         android:typeface="monospace"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -56,11 +62,11 @@
 
     <Button
         android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
         android:layout_marginStart="50dp"
-        android:text="Option 1"
         android:onClick="sendMessage"
+        android:text="Option 1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -68,8 +74,8 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
         android:layout_marginEnd="50dp"
         android:text="Option 2"
         android:onClick="sendMessage"
@@ -79,8 +85,8 @@
         app:layout_constraintVertical_bias="0.8" />
     <Button
         android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
         android:layout_marginStart="50dp"
         android:text="Option 3"
         android:onClick="sendMessage"
@@ -91,8 +97,8 @@
 
     <Button
         android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
         android:layout_marginEnd="50dp"
         android:text="option 4"
         android:onClick="sendMessage"
@@ -103,11 +109,13 @@
 
     <TextView
         android:id="@+id/score"
+        android:background="@color/white"
+        android:textStyle="bold|italic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="48dp"
         android:text="Score"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:typeface="monospace"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -115,5 +123,20 @@
         app:layout_constraintStart_toEndOf="@+id/text_date"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.2" />
+
+    <TextView
+        android:id="@+id/rule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:lines="4"
+        android:singleLine="false"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textAlignment="center"
+        android:text="Guess the Day\nChoose the correct day and win points. \n+3 sec for correct ans -3 sec for wrong ans. \nScore max before time runs out"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
