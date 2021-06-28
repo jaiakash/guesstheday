@@ -1,6 +1,4 @@
-# Guess the Day
-Guess the Day app
-For Delta Android App Task 1
+# Guess the Day Delta Android App Task 1
 
 A Quiz App that shows a random date and asks the user to guess the day of the week of the date.
 
